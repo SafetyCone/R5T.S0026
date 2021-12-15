@@ -1,3 +1,171 @@
 R5T.S0026 - Multiple scripts for auto-generating repositories, solutions, projects, and code.
 
-GOALS:
+
+##### Program-as-a-service #####
+
+Steps for creating a program-as-a-service using the latest infrastructure:
+
+* Ensure you have a console project (not library).
+* Create Program class in /Code/Program.cs.
+	* Modify Program to inherit from R5T.D0090.ProgramAsAServiceBase
+		* Included R5T.D0090.X001 project reference dependency in solution, project.
+        * Add using R5T.D0090.
+		* Implement the abstract class.
+		* Generate constructor.
+		* Add static code:
+
+#region Static
+
+static async Task Main()
+{
+    //OverridableProcessStartTimeProvider.Override("20211214-163052");
+    OverridableProcessStartTimeProvider.DoNotOverride();
+
+    await Instances.Host.NewBuilder()
+        .UseProgramAsAService<Program, T0075.IHostBuilder>()
+        .UseHostStartup<HostStartup, T0075.IHostBuilder>(Instances.ServiceAction.AddStartupAction())
+        .Build()
+        .SerializeConfigurationAudit()
+        .SerializeServiceCollectionAudit()
+        .RunAsync();
+}
+
+#endregion
+
+        * Add RunOperation()
+            * Definition
+            * Call in ServiceMain()
+        * Add using R5T.D0088.
+    * Add R5T.T0070.X001 project reference dependency.
+    * Add using Microsoft.Extensions.Hosting.
+* Create instances class
+    * Make static.
+    * Add R5T.T0070.IHost instance.
+* Add HostStartup class.
+    * Inherit from D0088.I0002.
+    * Implement the abstract class.
+    * Turn ConfigureConfiguration() into // Do nothing.
+    * Turn FillRequiredServices() into // Do nothing.
+    * For ConfigureServices(), add return Task.CompletedTask.
+* Add IServiceCollectionExtensions
+    * Create file /Code/Extensions/IServiceCollectionExtensions.cs.
+    * Add using Microsoft.Extensions.DependencyInjection.
+    * Add using D0088.I0002.
+    * Add AddHostStartup():
+
+public static IServiceCollection AddHostStartup(this IServiceCollection services)
+{
+    var dependencyServiceActions = new DependencyServiceActionAggregation();
+
+    services.AddHostStartup<HostStartup>(dependencyServiceActions)
+        // Add services required by HostStartup, but not by HostStartupBase.
+        ;
+
+    return services;
+}
+
+    * Add R5T.T0062.IServiceAction to Instances.
+* Add IServiceActionExtensions
+    * Create file /Code/Bases/Extensions/IServiceActionExtensions.cs.
+    * Make static class.
+    * Add using R5T.T0062.
+    * Add using R5T.T0063.
+    * Add AddStartupAction():
+* Add R5T.L0014.X001 project reference dependency to solution and project. (For later)
+* Run Virconium functionality to add all project reference dependencies. (Should be 23.)
+
+public static IServiceAction<HostStartup> AddStartupAction(this IServiceAction _)
+{
+    var output = _.New<HostStartup>(services => services.AddHostStartup());
+
+    return output;
+}
+
+Conclusions:
+
+* Add project reference dependencies to solution and project:
+    * R5T.D0088.X001
+    * R5T.D0090.X001
+    * R5T.T0070.X001
+    * R5T.D0088.I0002 (this is technically optional, but a great idea)
+    * R5T.L0014.X001
+
+=> These steps are most basic, and can run a "Hello world!".
+
+
+##### R5T.A0003 services platform #####
+
+* Add R5T.A0003 services platform.
+    * Add R5T.A0003 project reference dependency to solution and project.
+    * HostStartup
+        * Add using R5T.A0003.
+        * Add type name aliases:
+
+using IProvidedServiceActionAggregation = R5T.D0088.I0002.IProvidedServiceActionAggregation;
+using IRequiredServiceActionAggregation = R5T.D0088.I0002.IRequiredServiceActionAggregation;
+using ServicesPlatformRequiredServiceActionAggregation = R5T.A0003.RequiredServiceActionAggregation;
+
+        * Add code in ConfigureServices():
+
+// Services platform.
+var servicesPlatformRequiredServiceActionAggregation = new ServicesPlatformRequiredServiceActionAggregation
+{
+    ConfigurationAction = providedServicesAggregation.ConfigurationAction,
+    ExecutionSynchronicityProviderAction = executionSynchronicityProviderAction,
+    LoggerAction = providedServicesAggregation.LoggerAction,
+    LoggerFactoryAction = providedServicesAggregation.LoggerFactoryAction,
+    MachineMessageOutputSinkProviderActions = EnumerableHelper.Empty<IServiceAction<D0099.D002.IMachineMessageOutputSinkProvider>>(),
+    MachineMessageTypeJsonSerializationHandlerActions = EnumerableHelper.Empty<IServiceAction<D0098.IMachineMessageTypeJsonSerializationHandler>>(),
+    OrganizationProviderAction = organizationProviderAction,
+    RootOutputDirectoryPathProviderAction = rootOutputDirectoryPathProviderAction,
+};
+
+var servicesPlatform = Instances.ServiceAction.AddProvidedServiceActionAggregation(
+    servicesPlatformRequiredServiceActionAggregation);
+
+        * Add using R5T.Magyar.
+        * Add code:
+
+// Inputs.
+var executionSynchronicityProviderAction = Instances.ServiceAction.AddConstructorBasedExecutionSynchronicityProviderAction(Synchronicity.Synchronous);
+var organizationProviderAction = Instances.ServiceAction.AddOrganizationProviderAction(); // Rivet organization.
+var rootOutputDirectoryPathProviderAction = Instances.ServiceAction.AddConstructorBasedRootOutputDirectoryPathProviderAction(@"C:\Temp\Output");
+
+        * Add R5T.D0081.I001 project reference dependency to solution and project.
+        * Add using R5T.D0081.I001.
+        * Add R5T.Ostrogothia.Rivet project reference dependency to solution and project.
+        * Add using R5T.Ostrogothia.Rivet.
+        * Add R5T.D0048.Default project reference dependency to solution and project.
+        * Add using R5T.D0048.Default.
+        * Add using R5T.T0063.
+
+* Run Virconium functionality. (Add 102 projects.)
+
+Conclusions:
+
+=> These steps can be run.
+
+
+##### SerializeConfigurationAudit #####
+
+* Add R5T.D0102.X001 project reference dependency to solution and project.
+* HostStartup
+    * Add services.Run(servicesPlatform.ConfigurationAuditSerializerAction)
+* Program
+    * Add .SerializeConfigurationAudit() to host builder chain.
+** Run Virconium functionality. (0 added)
+
+=> These steps can be run.
+
+
+##### SerializeServiceCollectionAudit #####
+
+* Add R5T.D0104.X001 project reference dependency to solution and project.
+* HostStartup
+    * Add services.Run(servicesPlatform.ServiceCollectionAuditSerializerAction)
+* Program
+    * Add .SerializeServiceCollectionAudit() to host builder chain.
+* Run Virconium functionality. (0 added)
+
+=> These steps can be run.
+
