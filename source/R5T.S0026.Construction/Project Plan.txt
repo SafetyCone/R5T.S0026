@@ -1,0 +1,3 @@
+R5T.S0026.Construction - Construction project for Multiple scripts for auto-generating repositories, solutions, projects, and code..
+
+GOALS:
