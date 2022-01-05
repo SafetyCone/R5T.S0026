@@ -7,15 +7,24 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\R5T.A0003\source\R5T.A0003\R5T.A0003.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0037\source\R5T.D0037.A002\R5T.D0037.A002.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0077\source\R5T.D0077.A002\R5T.D0077.A002.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0078\source\R5T.D0078.A002\R5T.D0078.A002.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0079\source\R5T.D0079.A002\R5T.D0079.A002.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0081\source\R5T.D0081.I001\R5T.D0081.I001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0082\source\R5T.D0082.A001\R5T.D0082.A001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0084\source\R5T.D0084.D002.I001\R5T.D0084.D002.I001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0088.I0002\source\R5T.D0088.I0002\R5T.D0088.I0002.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0088\source\R5T.D0088.X001\R5T.D0088.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0090\source\R5T.D0090.X001\R5T.D0090.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0102\source\R5T.D0102.X001\R5T.D0102.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0104\source\R5T.D0104.X001\R5T.D0104.X001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0111\source\R5T.D0111.D001.I001\R5T.D0111.D001.I001.csproj" />
     <ProjectReference Include="..\..\..\R5T.L0014\source\R5T.L0014.X001\R5T.L0014.X001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.O0001\source\R5T.O0001\R5T.O0001.csproj" />
     <ProjectReference Include="..\..\..\R5T.Ostrogothia.Rivet\source\R5T.Ostrogothia.Rivet\R5T.Ostrogothia.Rivet.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0070\source\R5T.T0070.X001\R5T.T0070.X001.csproj" />
+    <ProjectReference Include="..\R5T.S0026.Library\R5T.S0026.Library.csproj" />
   </ItemGroup>
 
 </Project>

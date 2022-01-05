@@ -21,7 +21,7 @@ namespace R5T.S0026
 
             await Instances.Host.NewBuilder()
                 .UseProgramAsAService<Program, T0075.IHostBuilder>()
-                .UseHostStartup<HostStartup, T0075.IHostBuilder>(Instances.ServiceAction.AddStartupAction())
+                .UseHostStartup<HostStartup, T0075.IHostBuilder>(Instances.ServiceAction.AddHostStartupAction())
                 .Build()
                 .SerializeConfigurationAudit()
                 .SerializeServiceCollectionAudit()
@@ -43,7 +43,11 @@ namespace R5T.S0026
 
         private async Task RunOperation()
         {
-            Console.WriteLine("Hello world!");
+            await this.ServiceProvider.Run<O005_CreateProjectForExistingSolution>();
+            //await this.ServiceProvider.Run<O004_CreateSolutionInExistingRepository>();
+            //await this.ServiceProvider.Run<O003_CreateNewBasicTypesLibrary>();
+            //await this.ServiceProvider.Run<O002_DeleteRepository>();
+            //await this.ServiceProvider.Run<O001_CreateNewRepository>();
         }
     }
 }

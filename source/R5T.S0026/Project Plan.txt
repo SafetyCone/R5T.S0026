@@ -3,12 +3,21 @@ R5T.S0026 - Multiple scripts for auto-generating repositories, solutions, projec
 
 ##### Program-as-a-service #####
 
-Steps for creating a program-as-a-service using the latest infrastructure:
+Conclusions:
+
+* Add project reference dependencies to solution and project:
+    * R5T.D0088.X001
+    * R5T.D0090.X001
+    * R5T.T0070.X001
+    * R5T.D0088.I0002 (this is technically optional, but a great idea)
+    * R5T.L0014.X001
+
+Recipe for creating a program-as-a-service using the latest infrastructure:
 
 * Ensure you have a console project (not library).
 * Create Program class in /Code/Program.cs.
 	* Modify Program to inherit from R5T.D0090.ProgramAsAServiceBase
-		* Included R5T.D0090.X001 project reference dependency in solution, project.
+		* Include R5T.D0090.X001 project reference dependency in solution, project.
         * Add using R5T.D0090.
 		* Implement the abstract class.
 		* Generate constructor.
@@ -42,7 +51,7 @@ static async Task Main()
     * Make static.
     * Add R5T.T0070.IHost instance.
 * Add HostStartup class.
-    * Inherit from D0088.I0002.
+    * Inherit from D0088.I0002.HostStartupBase.
     * Implement the abstract class.
     * Turn ConfigureConfiguration() into // Do nothing.
     * Turn FillRequiredServices() into // Do nothing.
@@ -71,8 +80,6 @@ public static IServiceCollection AddHostStartup(this IServiceCollection services
     * Add using R5T.T0062.
     * Add using R5T.T0063.
     * Add AddStartupAction():
-* Add R5T.L0014.X001 project reference dependency to solution and project. (For later)
-* Run Virconium functionality to add all project reference dependencies. (Should be 23.)
 
 public static IServiceAction<HostStartup> AddStartupAction(this IServiceAction _)
 {
@@ -81,14 +88,10 @@ public static IServiceAction<HostStartup> AddStartupAction(this IServiceAction _
     return output;
 }
 
-Conclusions:
+* Add R5T.L0014.X001 project reference dependency to solution and project. (For later)
+* Run Virconium functionality to add all project reference dependencies. (Should be 23.)
 
-* Add project reference dependencies to solution and project:
-    * R5T.D0088.X001
-    * R5T.D0090.X001
-    * R5T.T0070.X001
-    * R5T.D0088.I0002 (this is technically optional, but a great idea)
-    * R5T.L0014.X001
+
 
 => These steps are most basic, and can run a "Hello world!".
 
@@ -136,7 +139,7 @@ var rootOutputDirectoryPathProviderAction = Instances.ServiceAction.AddConstruct
         * Add R5T.Ostrogothia.Rivet project reference dependency to solution and project.
         * Add using R5T.Ostrogothia.Rivet.
         * Add R5T.D0048.Default project reference dependency to solution and project.
-        * Add using R5T.D0048.Default.
+        * Add using R5T.D0048.Default. (RootOutputDirectoryPathProvider)
         * Add using R5T.T0063.
 
 * Run Virconium functionality. (Add 102 projects.)
@@ -168,4 +171,9 @@ Conclusions:
 * Run Virconium functionality. (0 added)
 
 => These steps can be run.
+
+
+##### Add T0020.IOperation #####
+
+* Add R5T.T0020 project reference dependency to solution and project.
 

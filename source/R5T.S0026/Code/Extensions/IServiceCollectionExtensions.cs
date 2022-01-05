@@ -8,7 +8,7 @@ using R5T.T0063;
 
 namespace R5T.S0026
 {
-    public static class IServiceCollectionExtensions
+    public static partial class IServiceCollectionExtensions
     {
         public static IServiceCollection AddHostStartup(this IServiceCollection services)
         {

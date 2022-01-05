@@ -6,9 +6,9 @@ using R5T.T0063;
 
 namespace R5T.S0026
 {
-    public static class IServiceActionExtensions
+    public static partial class IServiceActionExtensions
     {
-        public static IServiceAction<HostStartup> AddStartupAction(this IServiceAction _)
+        public static IServiceAction<HostStartup> AddHostStartupAction(this IServiceAction _)
         {
             var output = _.New<HostStartup>(services => services.AddHostStartup());
 

@@ -8,9 +8,17 @@ using R5T.Magyar;
 using R5T.Ostrogothia.Rivet;
 
 using R5T.A0003;
+using R5T.D0037.A002;
 using R5T.D0048.Default;
+using R5T.D0077.A002;
+using R5T.D0078.A002;
+using R5T.D0079.A002;
 using R5T.D0081.I001;
+using R5T.D0082.A001;
+using R5T.D0084.D002.I001;
 using R5T.D0088.I0002;
+using R5T.D0111.D001.I001;
+using R5T.O0001;
 using R5T.T0063;
 
 using IProvidedServiceActionAggregation = R5T.D0088.I0002.IProvidedServiceActionAggregation;
@@ -52,10 +60,77 @@ namespace R5T.S0026
             var servicesPlatform = Instances.ServiceAction.AddProvidedServiceActionAggregation(
                 servicesPlatformRequiredServiceActionAggregation);
 
+            // Core competencies.
+            // Level 0.
+            var repositoriesDirectoryPathProviderAction = Instances.ServiceAction.AddConstructorBasedRepositoriesDirectoryPathProviderAction(
+                 @"C:\Code\DEV\Git\GitHub\SafetyCone");
+
+            // Level 1.
+            var gitHubOperatorServiceActions = Instances.ServiceAction.AddGitHubOperatorServiceActions(
+                servicesPlatform.SecretsDirectoryFilePathProviderAction);
+            var dotnetOperatorActions = Instances.ServiceAction.AddDotnetOperatorActions(
+                servicesPlatform.CommandLineOperatorAction,
+                servicesPlatform.SecretsDirectoryFilePathProviderAction);
+            var visualStudioProjectFileOperatorActions = Instances.ServiceAction.AddVisualStudioProjectFileOperatorActions(
+                dotnetOperatorActions.DotnetOperatorAction,
+                servicesPlatform.FileNameOperatorAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var visualStudioSolutionFileOperatorActions = Instances.ServiceAction.AddVisualStudioSolutionFileOperatorActions(
+                dotnetOperatorActions.DotnetOperatorAction,
+                servicesPlatform.FileNameOperatorAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+
+            // Level 2.
+            var gitOperatorServices = Instances.ServiceAction.AddGitOperatorServices(
+                gitHubOperatorServiceActions.GitHubAuthenticationProviderAction,
+                servicesPlatform.SecretsDirectoryFilePathProviderAction);
+
+            var gitIgnoreTemplateFilePathProviderAction = Instances.ServiceAction.AddDefaultGitIgnoreTemplateFilePathProviderAction(
+                servicesPlatform.ExecutableDirectoryPathProviderAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+
+            // Operations.
+            var createProjectForExistingSolutionAction = Instances.ServiceAction.AddCreateProjectForExistingSolutionAction(
+                visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+            var createSolutionInExistingRepositoryAction = Instances.ServiceAction.AddCreateSolutionInExistingRepositoryAction(
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+
+            // Core competencies.
+            var o001a_CreateNewRepositoryAction = Instances.ServiceAction.AddO001a_CreateNewRepositoryCoreAction(
+                gitHubOperatorServiceActions.GitHubOperatorAction,
+                gitIgnoreTemplateFilePathProviderAction,
+                gitOperatorServices.GitOperatorAction,
+                repositoriesDirectoryPathProviderAction);
+            var o001_CreateNewRepositoryAction = Instances.ServiceAction.AddO001_CreateNewRepositoryAction(
+                o001a_CreateNewRepositoryAction);
+            var o002a_DeleteRepositoryCoreAction = Instances.ServiceAction.AddO002a_DeleteRepositoryCoreAction(
+                gitHubOperatorServiceActions.GitHubOperatorAction,
+                repositoriesDirectoryPathProviderAction);
+            var o002_DeleteRepositoryAction = Instances.ServiceAction.AddO002_DeleteRepositoryAction(
+                o002a_DeleteRepositoryCoreAction);
+            var o003_CreateNewBasicTypesLibraryAction = Instances.ServiceAction.AddO003_CreateNewBasicTypesLibraryAction(
+                gitHubOperatorServiceActions.GitHubOperatorAction,
+                gitIgnoreTemplateFilePathProviderAction,
+                gitOperatorServices.GitOperatorAction,
+                repositoriesDirectoryPathProviderAction,
+                visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+            var o004_CreateSolutionInExistingRepositoryAction = Instances.ServiceAction.AddO004_CreateSolutionInExistingRepositoryAction(
+                createSolutionInExistingRepositoryAction);
+            var o005_CreateProjectForExistingSolutionAction = Instances.ServiceAction.AddO005_CreateProjectForExistingSolutionAction(
+                createProjectForExistingSolutionAction);
+
             // Run.
             services
                 .Run(servicesPlatform.ConfigurationAuditSerializerAction)
                 .Run(servicesPlatform.ServiceCollectionAuditSerializerAction)
+                // Operations.
+                .Run(o001_CreateNewRepositoryAction)
+                .Run(o002_DeleteRepositoryAction)
+                .Run(o003_CreateNewBasicTypesLibraryAction)
+                .Run(o004_CreateSolutionInExistingRepositoryAction)
+                .Run(o005_CreateProjectForExistingSolutionAction)
                 ;
 
             return Task.CompletedTask;

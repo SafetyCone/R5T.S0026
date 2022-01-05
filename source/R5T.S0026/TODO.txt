@@ -1,0 +1,24 @@
+Operations:
+
+See also:
+
+* R5T.E0026
+* R5T.E0030.
+
+Repositories:
+
+* Create new repository.
+* Create new types repository.
+	* Create new basic (includes R5T.Magyar reference) types repository.
+* Create new extensions repository.
+
+
+Extensions
+
+* Create an extensions library project in a solution.
+	* Ensure all extensions classes are static.
+
+
+Projects
+
+* Create a new aggregation library in a solution.
