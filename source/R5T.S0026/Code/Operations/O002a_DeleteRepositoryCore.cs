@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using R5T.D0082;
 using R5T.D0084.D002;
+using R5T.T0020;
 
 
 namespace R5T.S0026
@@ -11,7 +12,8 @@ namespace R5T.S0026
     /// WARNING: will delete both GitHub and local copies of the repository!
     /// (The inverse of the create new repository operation.)
     /// </summary>
-    public class O002a_DeleteRepositoryCore
+    [OperationMarker]
+    public class O002a_DeleteRepositoryCore : IOperation
     {
         private IGitHubOperator GitHubOperator { get; }
         private IRepositoriesDirectoryPathProvider RepositoriesDirectoryPathProvider { get; }

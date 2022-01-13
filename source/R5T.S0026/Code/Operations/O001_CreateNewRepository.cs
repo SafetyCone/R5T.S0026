@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using R5T.T0020;
 using R5T.T0104;
 
 
 namespace R5T.S0026
 {
-    public class O001_CreateNewRepository : T0020.IOperation
+    [OperationMarker]
+    public class O001_CreateNewRepository : IActionOperation
     {
         private O001a_CreateNewRepositoryCore O001A_CreateNewRepositoryCore { get; }
 

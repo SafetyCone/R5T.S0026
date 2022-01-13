@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using R5T.D0078;
 using R5T.O0001;
+using R5T.T0020;
 
 
 namespace R5T.S0026
@@ -10,7 +10,8 @@ namespace R5T.S0026
     /// <summary>
     /// Creates a solution in an existing repository context.
     /// </summary>
-    public class O004_CreateSolutionInExistingRepository : T0020.IActionOperation
+    [OperationMarker]
+    public class O004_CreateSolutionInExistingRepository : IActionOperation
     {
         private CreateSolutionInExistingRepository CreateSolutionInExistingRepository { get; }
 

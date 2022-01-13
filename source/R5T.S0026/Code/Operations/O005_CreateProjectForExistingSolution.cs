@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using R5T.O0001;
+using R5T.T0020;
 using R5T.T0114;
 
 
@@ -10,7 +11,8 @@ namespace R5T.S0026
     /// <summary>
     /// Creates a new project in an existing solution.
     /// </summary>
-    public class O005_CreateProjectForExistingSolution : T0020.IActionOperation
+    [OperationMarker]
+    public class O005_CreateProjectForExistingSolution : IActionOperation
     {
         private CreateProjectForExistingSolution CreateProjectForExistingSolution { get; }
 

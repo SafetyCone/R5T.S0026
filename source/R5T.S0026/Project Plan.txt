@@ -7,10 +7,10 @@ Conclusions:
 
 * Add project reference dependencies to solution and project:
     * R5T.D0088.X001
-    * R5T.D0090.X001
-    * R5T.T0070.X001
     * R5T.D0088.I0002 (this is technically optional, but a great idea)
+    * R5T.D0090.X001
     * R5T.L0014.X001
+    * R5T.T0070.X001
 
 Recipe for creating a program-as-a-service using the latest infrastructure:
 
@@ -50,7 +50,7 @@ static async Task Main()
 * Create instances class
     * Make static.
     * Add R5T.T0070.IHost instance.
-* Add HostStartup class.
+* Add HostStartup class (/Code/HostStartup.cs).
     * Inherit from D0088.I0002.HostStartupBase.
     * Implement the abstract class.
     * Turn ConfigureConfiguration() into // Do nothing.

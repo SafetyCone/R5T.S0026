@@ -7,12 +7,14 @@ using R5T.D0079;
 using R5T.D0082;
 using R5T.D0084.D002;
 using R5T.D0111.D001;
+using R5T.T0020;
 using R5T.T0104;
 
 
 namespace R5T.S0026
 {
-    public class O003_CreateNewBasicTypesLibrary : T0020.IOperation
+    [OperationMarker]
+    public class O003_CreateNewBasicTypesLibrary : IActionOperation
     {
         private IGitHubOperator GitHubOperator { get; }
         private IGitIgnoreTemplateFilePathProvider GitIgnoreTemplateFilePathProvider { get; }
