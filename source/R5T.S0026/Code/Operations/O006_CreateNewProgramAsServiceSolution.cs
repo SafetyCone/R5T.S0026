@@ -61,22 +61,36 @@ namespace R5T.S0026
 
             var entryPointProjectReferenceIdentityStrings = new[]
             {
+                // Basic.
+                Instances.ProjectPath.R5T_Magyar(),
+                // For program-as-a-service basic functionality.
                 Instances.ProjectPath.R5T_D0088_X001(),
                 Instances.ProjectPath.R5T_D0088_I0002(),
                 Instances.ProjectPath.R5T_D0090_X001(),
                 Instances.ProjectPath.R5T_L0014_X001(),
                 Instances.ProjectPath.R5T_T0070_X001(),
+                // For the A0003 services platform.
+                Instances.ProjectPath.R5T_A0003(),
+                Instances.ProjectPath.R5T_D0081_I001(),
+                Instances.ProjectPath.R5T_Ostrogothia_Rivet(),
+                Instances.ProjectPath.R5T_D0048_Default(),
+                // For SerializeConfigurationAudit.
+                Instances.ProjectPath.R5T_D0102_X001(),
+                // For SerializeServiceCollectionAudit.
+                Instances.ProjectPath.R5T_D0104_X001(),
             };
 
             var instanceExtensionMethodBaseNamespacedTypeNames = new[]
             {
                 Instances.NamespacedTypeName.IHost_ExtensionMethodBase(),
+                Instances.NamespacedTypeName.IServiceAction_ExtensionMethodBase(),
             };
 
             var entryPointProjectReferenceFilePaths = await Instances.ProjectOperator.GetFilePathsForProjectIdentityStrings(
                 entryPointProjectReferenceIdentityStrings,
                 this.ProjectRepository);
 
+            // Create the first step of the solution.
             await Instances.SolutionOperator.CreateSolutionInExistingRepository(
                 repositoryDirectoryPath,
                 solutionName,
@@ -87,7 +101,7 @@ namespace R5T.S0026
                         projectName,
                         projectDescription,
                         solutionFileContext.DirectoryPath,
-                        entryPointProjectReferenceFilePaths);
+                        dependencyProjectReferenceFilePaths: entryPointProjectReferenceFilePaths);
 
                     await Instances.ProjectGenerator.CreateConsoleProject(
                         solutionFileContext,
@@ -98,14 +112,15 @@ namespace R5T.S0026
                         {
                             var projectNamespaceName = entryPointProjectFileSpecification.DefaultNamespaceName;
 
-                            // Project class file.
-                            await projectFileContext.CreateProjectFile(programFileContext =>
+                            // Delete the initial program file (wrog location).
+                            projectFileContext.DeleteInitialProgramFile();
+
+                            // Create the new program class file.
+                            await projectFileContext.CreateProgramFile(async programFileContext =>
                             {
-                                Instances.CodeFileGenerator.CreateProgramAsAService(
+                                await Instances.CodeFileGenerator.CreateProgramAsAService(
                                     programFileContext.FilePath,
                                     projectNamespaceName);
-
-                                return Task.CompletedTask;
                             });
 
                             // Instances class file.
@@ -120,13 +135,11 @@ namespace R5T.S0026
                             });
 
                             // HostStartup class.
-                            await projectFileContext.CreateHostStartupFile(hostStartupFileContext =>
+                            await projectFileContext.CreateHostStartupFile(async hostStartupFileContext =>
                             {
-                                Instances.CodeFileGenerator.CreateHostStartup(
+                                await Instances.CodeFileGenerator.CreateHostStartup(
                                     hostStartupFileContext.FilePath,
                                     projectNamespaceName);
-
-                                return Task.CompletedTask;
                             });
 
                             // IServiceCollectionExtensions

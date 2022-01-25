@@ -43,11 +43,15 @@ namespace R5T.S0026
 
         private async Task RunOperation()
         {
+            //await this.ServiceProvider.Run<O006a_ModifyHostStartupForA0003>();
+            //await this.ServiceProvider.Run<O006_CreateNewProgramAsServiceSolution>();
             //await this.ServiceProvider.Run<O005_CreateProjectForExistingSolution>();
             //await this.ServiceProvider.Run<O004_CreateSolutionInExistingRepository>();
-            await this.ServiceProvider.Run<O003_CreateNewBasicTypesLibrary>();
+            //await this.ServiceProvider.Run<O003_CreateNewBasicTypesLibrary>();
             //await this.ServiceProvider.Run<O002_DeleteRepository>();
             //await this.ServiceProvider.Run<O001_CreateNewRepository>();
+
+            await this.ServiceProvider.Run<O999_Scratch>();
         }
     }
 }

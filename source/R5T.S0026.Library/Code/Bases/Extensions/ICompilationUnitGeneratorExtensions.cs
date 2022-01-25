@@ -11,27 +11,6 @@ namespace System
 {
     public static class ICompilationUnitGeneratorExtensions
     {
-        public static CompilationUnitSyntax CreateHostStartup(this ICompilationUnitGenerator _,
-            string namespaceName)
-        {
-            var output = _.InNewNamespace(
-                namespaceName,
-                (xNamespace, xNamespaceNames) =>
-                {
-                    // System namespace already added.
-                    // Add the namespace for the HostStartupBase type.
-                    xNamespaceNames.Add(
-                        Instances.NamespaceName.Values().R5T_D0088_I0002());
-
-                    var hostStartupClass = Instances.ClassGenerator.CreateHostStartup();
-
-                    var outputNamespace = xNamespace.AddClass(hostStartupClass);
-                    return outputNamespace;
-                });
-
-            return output;
-        }
-
         public static CompilationUnitSyntax CreateIServiceActionExtensions_Initial(this ICompilationUnitGenerator _,
             string namespaceName)
         {
@@ -63,8 +42,10 @@ namespace System
                 {
                     // System namespace already added.
                     // Add the namespace for the HostStartupBase type.
-                    xNamespaceNames.Add(
-                        Instances.NamespaceName.Values().R5T_D0088_I0002());
+                    xNamespaceNames.AddRange(
+                        Instances.NamespaceName.Values().Microsoft_Extensions_DependencyInjection(),
+                        Instances.NamespaceName.Values().R5T_D0088_I0002(),
+                        Instances.NamespaceName.Values().R5T_T0063());
 
                     var iServiceCollectionExtensionsClass = Instances.ClassGenerator.CreateIServiceCollectionExtensions_Initial();
 

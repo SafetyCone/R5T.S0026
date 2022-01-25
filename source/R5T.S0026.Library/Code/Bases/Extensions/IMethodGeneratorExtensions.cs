@@ -30,7 +30,7 @@ public static IServiceCollection AddHostStartup(this IServiceCollection services
         public static MethodDeclarationSyntax GetAddHostStartupAddXAction(this IMethodGenerator _)
         {
             var text = $@"
-public static IServiceAction<HostStartup> AddStartupAction(this IServiceAction _)
+public static IServiceAction<HostStartup> AddHostStartupAction(this IServiceAction _)
 {{
     var output = _.New<HostStartup>(services => services.AddHostStartup());
 
@@ -61,6 +61,7 @@ public override Task ConfigureConfiguration(IConfigurationBuilder configurationB
 protected override Task ConfigureServices(IServiceCollection services, IProvidedServiceActionAggregation providedServicesAggregation)
 {{
     // Add services here.
+    var serviceAction = Instances.ServiceAction.AddXAction();
 
     return Task.CompletedTask;
 }}

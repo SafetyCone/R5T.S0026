@@ -15,8 +15,11 @@ using R5T.D0078.A002;
 using R5T.D0079.A002;
 using R5T.D0081.I001;
 using R5T.D0082.A001;
+using R5T.D0083.I001;
 using R5T.D0084.D002.I001;
 using R5T.D0088.I0002;
+using R5T.D0101.I0001;
+using R5T.D0101.I001;
 using R5T.D0111.D001.I001;
 using R5T.O0001;
 using R5T.T0063;
@@ -65,22 +68,11 @@ namespace R5T.S0026
             var repositoriesDirectoryPathProviderAction = Instances.ServiceAction.AddConstructorBasedRepositoriesDirectoryPathProviderAction(
                  @"C:\Code\DEV\Git\GitHub\SafetyCone");
 
-            // Level 1.
+            // Level 01.
             var gitHubOperatorServiceActions = Instances.ServiceAction.AddGitHubOperatorServiceActions(
                 servicesPlatform.SecretsDirectoryFilePathProviderAction);
-            var dotnetOperatorActions = Instances.ServiceAction.AddDotnetOperatorActions(
-                servicesPlatform.CommandLineOperatorAction,
-                servicesPlatform.SecretsDirectoryFilePathProviderAction);
-            var visualStudioProjectFileOperatorActions = Instances.ServiceAction.AddVisualStudioProjectFileOperatorActions(
-                dotnetOperatorActions.DotnetOperatorAction,
-                servicesPlatform.FileNameOperatorAction,
-                servicesPlatform.StringlyTypedPathOperatorAction);
-            var visualStudioSolutionFileOperatorActions = Instances.ServiceAction.AddVisualStudioSolutionFileOperatorActions(
-                dotnetOperatorActions.DotnetOperatorAction,
-                servicesPlatform.FileNameOperatorAction,
-                servicesPlatform.StringlyTypedPathOperatorAction);
 
-            // Level 2.
+            // Level 02.
             var gitOperatorServices = Instances.ServiceAction.AddGitOperatorServices(
                 gitHubOperatorServiceActions.GitHubAuthenticationProviderAction,
                 servicesPlatform.SecretsDirectoryFilePathProviderAction);
@@ -89,12 +81,38 @@ namespace R5T.S0026
                 servicesPlatform.ExecutableDirectoryPathProviderAction,
                 servicesPlatform.StringlyTypedPathOperatorAction);
 
+            // Project repository.
+            var projectRepositoryFilePathsProviderAction = Instances.ServiceAction.AddHardCodedProjectRepositoryFilePathsProviderAction();
+
+            var fileBasedProjectRepositoryAction = Instances.ServiceAction.AddFileBasedProjectRepositoryAction(
+                projectRepositoryFilePathsProviderAction);
+
+            var projectRepositoryAction = Instances.ServiceAction.ForwardFileBasedProjectRepositoryToProjectRepositoryAction(
+                fileBasedProjectRepositoryAction);
+
+            // Visual studio.
+            var dotnetOperatorActions = Instances.ServiceAction.AddDotnetOperatorActions(
+                servicesPlatform.CommandLineOperatorAction,
+                servicesPlatform.SecretsDirectoryFilePathProviderAction);
+            var visualStudioProjectFileOperatorActions = Instances.ServiceAction.AddVisualStudioProjectFileOperatorActions(
+                dotnetOperatorActions.DotnetOperatorAction,
+                servicesPlatform.FileNameOperatorAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var visualStudioProjectFileReferencesProviderAction = Instances.ServiceAction.AddVisualStudioProjectFileReferencesProviderAction(
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var visualStudioSolutionFileOperatorActions = Instances.ServiceAction.AddVisualStudioSolutionFileOperatorActions(
+                dotnetOperatorActions.DotnetOperatorAction,
+                servicesPlatform.FileNameOperatorAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+
             // Operations.
             var createProjectForExistingSolutionAction = Instances.ServiceAction.AddCreateProjectForExistingSolutionAction(
                 visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
                 visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
             var createSolutionInExistingRepositoryAction = Instances.ServiceAction.AddCreateSolutionInExistingRepositoryAction(
                 visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+
+            
 
             // Core competencies.
             var o001a_CreateNewRepositoryAction = Instances.ServiceAction.AddO001a_CreateNewRepositoryCoreAction(
@@ -120,17 +138,34 @@ namespace R5T.S0026
                 createSolutionInExistingRepositoryAction);
             var o005_CreateProjectForExistingSolutionAction = Instances.ServiceAction.AddO005_CreateProjectForExistingSolutionAction(
                 createProjectForExistingSolutionAction);
+            var o006_CreateNewProgramAsServiceSolutionAction = Instances.ServiceAction.AddO006_CreateNewProgramAsServiceSolutionAction(
+                projectRepositoryAction,
+                servicesPlatform.StringlyTypedPathOperatorAction,
+                visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
+                visualStudioProjectFileReferencesProviderAction,
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+            var o006a_ModifyHostStartupForA0003Action = Instances.ServiceAction.AddO006a_ModifyHostStartupForA0003Action(
+                projectRepositoryAction,
+                visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
+                visualStudioProjectFileReferencesProviderAction,
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+
+            // Misc.
+            var o999_ScratchAction = Instances.ServiceAction.AddO999_ScratchAction();
 
             // Run.
-            services
+            services.MarkAsServiceCollectonConfigurationStatement()
                 .Run(servicesPlatform.ConfigurationAuditSerializerAction)
                 .Run(servicesPlatform.ServiceCollectionAuditSerializerAction)
                 // Operations.
+                .Run(o999_ScratchAction)
                 .Run(o001_CreateNewRepositoryAction)
                 .Run(o002_DeleteRepositoryAction)
                 .Run(o003_CreateNewBasicTypesLibraryAction)
                 .Run(o004_CreateSolutionInExistingRepositoryAction)
                 .Run(o005_CreateProjectForExistingSolutionAction)
+                .Run(o006_CreateNewProgramAsServiceSolutionAction)
+                .Run(o006a_ModifyHostStartupForA0003Action)
                 ;
 
             return Task.CompletedTask;

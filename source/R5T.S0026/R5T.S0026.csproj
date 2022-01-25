@@ -27,6 +27,8 @@
     <ProjectReference Include="..\..\..\R5T.Ostrogothia.Rivet\source\R5T.Ostrogothia.Rivet\R5T.Ostrogothia.Rivet.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0070\source\R5T.T0070.X001\R5T.T0070.X001.csproj" />
     <ProjectReference Include="..\R5T.S0026.Library\R5T.S0026.Library.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0101.I0001\source\R5T.D0101.I0001\R5T.D0101.I0001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0083\source\R5T.D0083.I001\R5T.D0083.I001.csproj" />
   </ItemGroup>
 
 </Project>

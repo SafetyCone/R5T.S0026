@@ -12,25 +12,25 @@ namespace System
 {
     public static class IClassGeneratorExtensions
     {
-        public static ClassDeclarationSyntax CreateHostStartup(this IClassGenerator _)
+        public static ClassDeclarationSyntax CreateHostStartup_Initial(this IClassGenerator _)
         {
             var configureConfigurationMethod = Instances.MethodGenerator.GetConfigureConfigurationEmpty();
             var configureServicesMethod = Instances.MethodGenerator.GetConfigureServicesStub();
             var fillRequiredServiceActionsMethod = Instances.MethodGenerator.GetFillRequiredServiceActionsNoneRequired();
 
-            var members = new[]
+            var methods = new[]
             {
                 configureConfigurationMethod,
                 configureServicesMethod,
                 fillRequiredServiceActionsMethod,
             }
-            .Select(x => x.IndentBlock(Instances.Indentation.Method()))
+            //.Select(x => x.IndentBlock(Instances.Indentation.Method()))
             .Now();
 
             var output = _.GetPublicClass(
                 Instances.ClassName.HostStartup(),
                 Instances.TypeName.HostStartupBase()) // Namespace handled elsewhere.
-                .AddMembersWithLineSpacing(members)
+                .AddMethods(methods)
                 ;
 
             return output;
