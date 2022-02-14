@@ -25,7 +25,7 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Input.
-            var unadjustedRepositoryName = "R5T.T9999"; // Unadjusted relative to whether the repository is private or not.
+            var unadjustedRepositoryName = "R5T.Test"; // Unadjusted relative to whether the repository is private or not.
             var isPrivate = false;
             //var repositoryNameOverride = 
 

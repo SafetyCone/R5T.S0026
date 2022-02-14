@@ -25,7 +25,7 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Inputs.
-            var repositoryDirectoryPath = @"C:\Code\DEV\Git\GitHub\SafetyCone\R5T.E1000.Private";
+            var repositoryDirectoryPath = @"C:\Code\DEV\Git\GitHub\SafetyCone\Test";
             var solutionName = "TestSolution";
 
             // Run.

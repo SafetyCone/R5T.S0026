@@ -43,8 +43,8 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Inputs.
-            var libraryName = "R5T.T9999";
-            var libraryDescription = "IName and related extension method bases.";
+            var libraryName = "Test";
+            var libraryDescription = "Test";
             var isPrivate = false;
 
             // Run.

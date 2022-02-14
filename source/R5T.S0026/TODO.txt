@@ -1,3 +1,12 @@
+* Modify O007_CreateNewProgramAsServiceRepository to include R5T.T0020 as a project reference.
+* Fix O007_CreateNewProgramAsServiceRepository to put IServiceActionExtensions in /Bases/Extensions.
+* Fix O007_CreateNewProgramAsServiceRepository to have propery line spacing for AddHostStartupAction, and AddHostStartup
+* Add Documentation class.
+* Add Project Plan.txt file.
+
+* Create operation to add an operation class to a project.
+
+
 Operations:
 
 See also:

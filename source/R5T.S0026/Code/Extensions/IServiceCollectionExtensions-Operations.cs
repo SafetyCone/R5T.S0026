@@ -21,6 +21,21 @@ namespace R5T.S0026
     public static partial class IServiceCollectionExtensions
     {
         /// <summary>
+        /// Adds the <see cref="O007_CreateNewProgramAsServiceRepository"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO007_CreateNewProgramAsServiceRepository(this IServiceCollection services,
+            IServiceAction<O001a_CreateNewRepositoryCore> o001a_CreateNewRepositoryCoreAction,
+            IServiceAction<O006_CreateNewProgramAsServiceSolutionCore> o006_CreateNewProgramAsServiceSolutionCoreAction)
+        {
+            services
+                .Run(o001a_CreateNewRepositoryCoreAction)
+                .Run(o006_CreateNewProgramAsServiceSolutionCoreAction)
+                .AddSingleton<O007_CreateNewProgramAsServiceRepository>();
+
+            return services;
+        }
+
+        /// <summary>
         /// Adds the <see cref="O006a_ModifyHostStartupForA0003"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceCollection AddO006a_ModifyHostStartupForA0003(this IServiceCollection services,
@@ -43,6 +58,19 @@ namespace R5T.S0026
         /// Adds the <see cref="O006_CreateNewProgramAsServiceSolution"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceCollection AddO006_CreateNewProgramAsServiceSolution(this IServiceCollection services,
+            IServiceAction<O006_CreateNewProgramAsServiceSolutionCore> o006_CreateNewProgramAsServiceSolutionCoreAction)
+        {
+            services
+                .Run(o006_CreateNewProgramAsServiceSolutionCoreAction)
+                .AddSingleton<O006_CreateNewProgramAsServiceSolution>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O006_CreateNewProgramAsServiceSolutionCore"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO006_CreateNewProgramAsServiceSolutionCore(this IServiceCollection services,
             IServiceAction<IProjectRepository> projectRepositoryAction,
             IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction,
             IServiceAction<IVisualStudioProjectFileOperator> visualStudioProjectFileOperatorAction,
@@ -55,7 +83,7 @@ namespace R5T.S0026
                 .Run(visualStudioProjectFileOperatorAction)
                 .Run(visualStudioProjectFileReferencesProviderAction)
                 .Run(visualStudioSolutionFileOperatorAction)
-                .AddSingleton<O006_CreateNewProgramAsServiceSolution>();
+                .AddSingleton<O006_CreateNewProgramAsServiceSolutionCore>();
 
             return services;
         }

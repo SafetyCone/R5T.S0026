@@ -26,7 +26,7 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Inputs.
-            var solutionFilePath = @"C:\Code\DEV\Git\GitHub\SafetyCone\R5T.E1000.Private\source\TestSolution.sln";
+            var solutionFilePath = @"C:\Code\DEV\Git\GitHub\SafetyCone\Test\source\TestSolution.sln";
             var projectName = "TestProject";
             var projectDescription = "A test project.";
             var projectType = Instances.ProjectType.Console();

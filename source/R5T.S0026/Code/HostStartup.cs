@@ -105,16 +105,14 @@ namespace R5T.S0026
                 servicesPlatform.FileNameOperatorAction,
                 servicesPlatform.StringlyTypedPathOperatorAction);
 
-            // Operations.
+            // Operations-Dependencies.
             var createProjectForExistingSolutionAction = Instances.ServiceAction.AddCreateProjectForExistingSolutionAction(
                 visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
                 visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
             var createSolutionInExistingRepositoryAction = Instances.ServiceAction.AddCreateSolutionInExistingRepositoryAction(
                 visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
 
-            
-
-            // Core competencies.
+            // Operations.
             var o001a_CreateNewRepositoryAction = Instances.ServiceAction.AddO001a_CreateNewRepositoryCoreAction(
                 gitHubOperatorServiceActions.GitHubOperatorAction,
                 gitIgnoreTemplateFilePathProviderAction,
@@ -138,17 +136,22 @@ namespace R5T.S0026
                 createSolutionInExistingRepositoryAction);
             var o005_CreateProjectForExistingSolutionAction = Instances.ServiceAction.AddO005_CreateProjectForExistingSolutionAction(
                 createProjectForExistingSolutionAction);
-            var o006_CreateNewProgramAsServiceSolutionAction = Instances.ServiceAction.AddO006_CreateNewProgramAsServiceSolutionAction(
+            var o006_CreateNewProgramAsServiceSolutionCoreAction = Instances.ServiceAction.AddO006_CreateNewProgramAsServiceSolutionCoreAction(
                 projectRepositoryAction,
                 servicesPlatform.StringlyTypedPathOperatorAction,
                 visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
                 visualStudioProjectFileReferencesProviderAction,
                 visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+            var o006_CreateNewProgramAsServiceSolutionAction = Instances.ServiceAction.AddO006_CreateNewProgramAsServiceSolutionAction(
+                o006_CreateNewProgramAsServiceSolutionCoreAction);
             var o006a_ModifyHostStartupForA0003Action = Instances.ServiceAction.AddO006a_ModifyHostStartupForA0003Action(
                 projectRepositoryAction,
                 visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction,
                 visualStudioProjectFileReferencesProviderAction,
                 visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+            var o007_CreateNewProgramAsServiceRepositoryAction = Instances.ServiceAction.AddO007_CreateNewProgramAsServiceRepositoryAction(
+                o001a_CreateNewRepositoryAction,
+                o006_CreateNewProgramAsServiceSolutionCoreAction);
 
             // Misc.
             var o999_ScratchAction = Instances.ServiceAction.AddO999_ScratchAction();
@@ -166,6 +169,7 @@ namespace R5T.S0026
                 .Run(o005_CreateProjectForExistingSolutionAction)
                 .Run(o006_CreateNewProgramAsServiceSolutionAction)
                 .Run(o006a_ModifyHostStartupForA0003Action)
+                .Run(o007_CreateNewProgramAsServiceRepositoryAction)
                 ;
 
             return Task.CompletedTask;

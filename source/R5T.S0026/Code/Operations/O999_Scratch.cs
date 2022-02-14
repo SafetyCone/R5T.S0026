@@ -8,6 +8,7 @@ using R5T.S0026.Library;
 
 namespace R5T.S0026
 {
+    [OperationMarker]
     public class O999_Scratch : IActionOperation
     {
         #region Static
