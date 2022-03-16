@@ -25,15 +25,15 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Inputs.
-            var unadjustedRepositoryName = "R5T.E0046"; // Unadjusted relative to whether the repository is private or not.
+            var unadjustedRepositoryName = "R5T.S0030"; // Unadjusted relative to whether the repository is private or not.
             var isPrivate = false;
-            var repositoryDescription = "Experiment with all of the new code construction technologies.";
+            var repositoryDescription = "Nomad functionality: Survey service definitions, implementations, and dependency mappings and store these in a database.";
 
             // Run.
             var libraryName = Instances.RepositoryNameOperator.GetLibraryName(unadjustedRepositoryName);
             var libraryDescription = repositoryDescription; // TODO, create new base.
 
-            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryName(
+            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryNameForPrivacy(
                 unadjustedRepositoryName,
                 isPrivate);
 

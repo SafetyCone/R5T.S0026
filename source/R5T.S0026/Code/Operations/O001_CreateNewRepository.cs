@@ -27,7 +27,7 @@ namespace R5T.S0026
             var repositoryDescription = "Experimental repository for creating files in a local repository (should be empty, and all code within can be deleted without commit/push).";
 
             // Run.
-            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryName(
+            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryNameForPrivacy(
                 unadjustedRepositoryName,
                 isPrivate);
 

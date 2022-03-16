@@ -21,8 +21,11 @@ using R5T.D0088.I0002;
 using R5T.D0101.I0001;
 using R5T.D0101.I001;
 using R5T.D0111.D001.I001;
+using R5T.D0116.A0001;
 using R5T.O0001;
 using R5T.T0063;
+
+using R5T.S0026.Library;
 
 using IProvidedServiceActionAggregation = R5T.D0088.I0002.IProvidedServiceActionAggregation;
 using IRequiredServiceActionAggregation = R5T.D0088.I0002.IRequiredServiceActionAggregation;
@@ -63,24 +66,6 @@ namespace R5T.S0026
             var servicesPlatform = Instances.ServiceAction.AddProvidedServiceActionAggregation(
                 servicesPlatformRequiredServiceActionAggregation);
 
-            // Core competencies.
-            // Level 0.
-            var repositoriesDirectoryPathProviderAction = Instances.ServiceAction.AddConstructorBasedRepositoriesDirectoryPathProviderAction(
-                 @"C:\Code\DEV\Git\GitHub\SafetyCone");
-
-            // Level 01.
-            var gitHubOperatorServiceActions = Instances.ServiceAction.AddGitHubOperatorServiceActions(
-                servicesPlatform.SecretsDirectoryFilePathProviderAction);
-
-            // Level 02.
-            var gitOperatorServices = Instances.ServiceAction.AddGitOperatorServices(
-                gitHubOperatorServiceActions.GitHubAuthenticationProviderAction,
-                servicesPlatform.SecretsDirectoryFilePathProviderAction);
-
-            var gitIgnoreTemplateFilePathProviderAction = Instances.ServiceAction.AddDefaultGitIgnoreTemplateFilePathProviderAction(
-                servicesPlatform.ExecutableDirectoryPathProviderAction,
-                servicesPlatform.StringlyTypedPathOperatorAction);
-
             // Project repository.
             var projectRepositoryFilePathsProviderAction = Instances.ServiceAction.AddHardCodedProjectRepositoryFilePathsProviderAction();
 
@@ -104,6 +89,69 @@ namespace R5T.S0026
                 dotnetOperatorActions.DotnetOperatorAction,
                 servicesPlatform.FileNameOperatorAction,
                 servicesPlatform.StringlyTypedPathOperatorAction);
+
+            var usingDirectivesFormatterActions = Instances.ServiceAction.AddUsingDirectivesFormatterActions();
+
+            // Core competencies.
+            // Level 00.
+            var classContextProviderAction = Instances.ServiceAction.AddClassContextProviderAction();
+            
+            var methodContextProviderAction = Instances.ServiceAction.AddMethodContextProviderAction();
+            var namespaceContextProviderAction = Instances.ServiceAction.AddNamespaceContextProviderAction();
+            var repositoriesDirectoryPathProviderAction = Instances.ServiceAction.AddConstructorBasedRepositoriesDirectoryPathProviderAction(
+                 @"C:\Code\DEV\Git\GitHub\SafetyCone");
+            var repositorySolutionProjectFileSystemConventionsAction = Instances.ServiceAction.AddRepositorySolutionProjectFileSystemConventionsAction(
+                servicesPlatform.StringlyTypedPathOperatorAction);
+
+            // Level 01.
+            var compilationUnitContextProviderAction = Instances.ServiceAction.AddCompilationUnitContextProviderAction(
+                usingDirectivesFormatterActions.UsingDirectivesFormatterAction);
+            var directoryContextProviderAction = Instances.ServiceAction.AddDirectoryContextProviderAction(
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var fileContextProviderAction = Instances.ServiceAction.AddFileContextProviderAction(
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var gitHubOperatorServiceActions = Instances.ServiceAction.AddGitHubOperatorServiceActions(
+                servicesPlatform.SecretsDirectoryFilePathProviderAction);
+
+            // Level 02.
+            var fileSystemContextProviderAggregationAction = Instances.ServiceAction.AddFileSystemContextProviderAggregationAction(
+                directoryContextProviderAction,
+                fileContextProviderAction);
+            var gitOperatorServices = Instances.ServiceAction.AddGitOperatorServices(
+                gitHubOperatorServiceActions.GitHubAuthenticationProviderAction,
+                servicesPlatform.SecretsDirectoryFilePathProviderAction);
+            var gitIgnoreTemplateFilePathProviderAction = Instances.ServiceAction.AddDefaultGitIgnoreTemplateFilePathProviderAction(
+                servicesPlatform.ExecutableDirectoryPathProviderAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var syntaxContextProviderAggregationAction = Instances.ServiceAction.AddSyntaxContextProviderAggregationAction(
+                classContextProviderAction,
+                compilationUnitContextProviderAction,
+                methodContextProviderAction,
+                namespaceContextProviderAction);
+
+            // Level 03.
+            var basicLocalRepositoryContextProviderAction = Instances.ServiceAction.AddBasicLocalRepositoryContextProviderAction(
+                gitOperatorServices.GitOperatorAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var basicSolutionContextProviderAction = Instances.ServiceAction.AddBasicSolutionContextProviderAction(
+                servicesPlatform.StringlyTypedPathOperatorAction,
+                visualStudioProjectFileReferencesProviderAction,
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
+            var localRepositoryContextProviderAction = Instances.ServiceAction.AddLocalRepositoryContextProviderAction(
+                gitIgnoreTemplateFilePathProviderAction,
+                repositoriesDirectoryPathProviderAction,
+                gitOperatorServices.GitOperatorAction,
+                servicesPlatform.StringlyTypedPathOperatorAction);
+            var projectContextProviderAction = Instances.ServiceAction.AddProjectContextProviderAction(
+                servicesPlatform.StringlyTypedPathOperatorAction,
+                visualStudioProjectFileOperatorActions.VisualStudioProjectFileOperatorAction);
+            var remoteRepositoryContextProviderAction = Instances.ServiceAction.AddRemoteRepositoryContextProviderAction(
+                gitHubOperatorServiceActions.GitHubOperatorAction);
+            var solutionContextProviderAction = Instances.ServiceAction.AddSolutionContextProviderAction(
+                projectRepositoryAction,
+                servicesPlatform.StringlyTypedPathOperatorAction,
+                visualStudioProjectFileReferencesProviderAction,
+                visualStudioSolutionFileOperatorActions.VisualStudioSolutionFileOperatorAction);
 
             // Operations-Dependencies.
             var createProjectForExistingSolutionAction = Instances.ServiceAction.AddCreateProjectForExistingSolutionAction(
@@ -153,8 +201,62 @@ namespace R5T.S0026
                 o001a_CreateNewRepositoryAction,
                 o006_CreateNewProgramAsServiceSolutionCoreAction);
 
+            // 100's - Level 01.
+            var o100A_CreateNewRepositoryOnlyAction = Instances.ServiceAction.AddO100A_CreateNewRepositoryOnlyAction(
+                localRepositoryContextProviderAction,
+                remoteRepositoryContextProviderAction);
+            var o100B_InitialSetupWithCheckInAction = Instances.ServiceAction.AddO100B_InitialSetupWithCheckInAction(
+                localRepositoryContextProviderAction);
+            var o101_DeleteNewRepositoryCoreAction = Instances.ServiceAction.AddO101_DeleteNewRepositoryCoreAction(
+                localRepositoryContextProviderAction,
+                remoteRepositoryContextProviderAction);
+            var o102A_CreateSolutionOnlyAction = Instances.ServiceAction.AddO102A_CreateSolutionOnlyAction(
+                basicSolutionContextProviderAction);
+            var o102B_ModifyInitialSolutionAction = Instances.ServiceAction.AddO102B_ModifyInitialSolutionAction(
+                solutionContextProviderAction);
+            var o103A_CreateAndAddProjectOnlyAction = Instances.ServiceAction.AddO103A_CreateAndAddProjectOnlyAction(
+                projectContextProviderAction,
+                solutionContextProviderAction);
+            var o103B_ModifyInitialProjectForProjectTypeAction = Instances.ServiceAction.AddO103B_ModifyInitialProjectForProjectTypeAction(
+                fileSystemContextProviderAggregationAction,
+                projectContextProviderAction,
+                syntaxContextProviderAggregationAction);
+            var o104_DeleteProjectFromSolutionAction = Instances.ServiceAction.AddO104_DeleteProjectFromSolutionAction(
+                projectContextProviderAction,
+                basicSolutionContextProviderAction);
+
+            // 100's - Level 02.
+            var o100_CreateNewRepositoryCoreAction = Instances.ServiceAction.AddO100_CreateNewRepositoryCoreAction(
+                o100A_CreateNewRepositoryOnlyAction,
+                o100B_InitialSetupWithCheckInAction);
+            var o101_DeleteNewRepositoryAction = Instances.ServiceAction.AddO101_DeleteNewRepositoryAction(
+                o101_DeleteNewRepositoryCoreAction);
+            var o102_CreateSolutionInExistingRespositoryCoreAction = Instances.ServiceAction.AddO102_CreateSolutionInExistingRespositoryCoreAction(
+                repositoriesDirectoryPathProviderAction,
+                repositorySolutionProjectFileSystemConventionsAction,
+                servicesPlatform.StringlyTypedPathOperatorAction,
+                o102A_CreateSolutionOnlyAction,
+                o102B_ModifyInitialSolutionAction);
+            var o103_CreateProjectForExistingSolutionCoreAction = Instances.ServiceAction.AddO103_CreateProjectForExistingSolutionCoreAction(
+                o103A_CreateAndAddProjectOnlyAction,
+                o103B_ModifyInitialProjectForProjectTypeAction);
+
+            // 100's - Level 03.
+            var o100_CreateNewRepositoryAction = Instances.ServiceAction.AddO100_CreateNewRepositoryAction(
+                o100_CreateNewRepositoryCoreAction);
+            var o102_CreateSolutionInExistingRespositoryAction = Instances.ServiceAction.AddO102_CreateSolutionInExistingRespositoryAction(
+                o102_CreateSolutionInExistingRespositoryCoreAction);
+            var o103_CreateProjectForExistingSolutionAction = Instances.ServiceAction.AddO103_CreateProjectForExistingSolutionAction(
+                o103_CreateProjectForExistingSolutionCoreAction);
+
             // Misc.
-            var o999_ScratchAction = Instances.ServiceAction.AddO999_ScratchAction();
+            var o999_ScratchAction = Instances.ServiceAction.AddO999_ScratchAction(
+                fileSystemContextProviderAggregationAction,
+                basicLocalRepositoryContextProviderAction,
+                projectContextProviderAction,
+                remoteRepositoryContextProviderAction,
+                repositoriesDirectoryPathProviderAction,
+                basicSolutionContextProviderAction);
 
             // Run.
             services.MarkAsServiceCollectonConfigurationStatement()
@@ -170,6 +272,12 @@ namespace R5T.S0026
                 .Run(o006_CreateNewProgramAsServiceSolutionAction)
                 .Run(o006a_ModifyHostStartupForA0003Action)
                 .Run(o007_CreateNewProgramAsServiceRepositoryAction)
+                // Operations - 100's
+                .Run(o100_CreateNewRepositoryAction)
+                .Run(o101_DeleteNewRepositoryAction)
+                .Run(o102_CreateSolutionInExistingRespositoryAction)
+                .Run(o103_CreateProjectForExistingSolutionAction)
+                .Run(o104_DeleteProjectFromSolutionAction)
                 ;
 
             return Task.CompletedTask;

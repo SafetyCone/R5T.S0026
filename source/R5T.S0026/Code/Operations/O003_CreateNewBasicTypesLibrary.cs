@@ -55,7 +55,7 @@ namespace R5T.S0026
             var unadjustedRepositoryName = Instances.LibraryNameOperator.GetRepositoryName(libraryName);
             var repositoryDescription = libraryDescription;
 
-            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryName(
+            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryNameForPrivacy(
                 unadjustedRepositoryName,
                 isPrivate);
 

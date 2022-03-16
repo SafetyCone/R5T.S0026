@@ -66,6 +66,9 @@ namespace R5T.S0026
                 Instances.ProjectPath.R5T_D0090_X001(),
                 Instances.ProjectPath.R5T_L0014_X001(),
                 Instances.ProjectPath.R5T_T0070_X001(),
+                // Include logging.
+                Instances.ProjectPath.R5T_D0094_I001(),
+                Instances.ProjectPath.R5T_D0095_I001(),
                 // For the A0003 services platform.
                 Instances.ProjectPath.R5T_A0003(),
                 Instances.ProjectPath.R5T_D0081_I001(),
@@ -75,6 +78,8 @@ namespace R5T.S0026
                 Instances.ProjectPath.R5T_D0102_X001(),
                 // For SerializeServiceCollectionAudit.
                 Instances.ProjectPath.R5T_D0104_X001(),
+                // For operation in the program-as-a-service project.
+                Instances.ProjectPath.R5T_T0020(),
             };
 
             var instanceExtensionMethodBaseNamespacedTypeNames = new[]
@@ -161,7 +166,7 @@ namespace R5T.S0026
                         });
 
                     // Add all dependency project references to the solution.
-                    await Instances.SolutionOperator.AddProjectReferencesAndRecursiveDependencies(
+                    await Instances.SolutionOperator.AddDependencyProjectReferencesAndRecursiveDependencies(
                         solutionFileContext.FilePath,
                         entryPointProjectReferenceFilePaths,
                         this.StringlyTypedPathOperator,

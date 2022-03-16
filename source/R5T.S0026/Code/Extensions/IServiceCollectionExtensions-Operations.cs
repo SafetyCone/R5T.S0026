@@ -15,11 +15,232 @@ using R5T.D0111.D001;
 using R5T.O0001;
 using R5T.T0063;
 
+using R5T.S0026.Library;
+
 
 namespace R5T.S0026
 {
     public static partial class IServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds the <see cref="O104_DeleteProjectFromSolution"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO104_DeleteProjectFromSolution(this IServiceCollection services,
+            IServiceAction<IProjectContextProvider> projectContextProviderAction,
+            IServiceAction<IBasicSolutionContextProvider> solutionContextProviderAction)
+        {
+            services
+                .Run(projectContextProviderAction)
+                .Run(solutionContextProviderAction)
+                .AddSingleton<O104_DeleteProjectFromSolution>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O103_CreateProjectForExistingSolution"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO103_CreateProjectForExistingSolution(this IServiceCollection services,
+            IServiceAction<O103_CreateProjectForExistingSolutionCore> o103_CreateProjectForExistingSolutionCoreAction)
+        {
+            services
+                .Run(o103_CreateProjectForExistingSolutionCoreAction)
+                .AddSingleton<O103_CreateProjectForExistingSolution>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O103_CreateProjectForExistingSolutionCore"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO103_CreateProjectForExistingSolutionCore(this IServiceCollection services,
+            IServiceAction<O103A_CreateAndAddProjectOnly> o103A_CreateAndAddProjectOnlyAction,
+            IServiceAction<O103B_ModifyInitialProjectForProjectType> o103B_ModifyInitialProjectForProjectTypeAction)
+        {
+            services
+                .Run(o103A_CreateAndAddProjectOnlyAction)
+                .Run(o103B_ModifyInitialProjectForProjectTypeAction)
+                .AddSingleton<O103_CreateProjectForExistingSolutionCore>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O103A_CreateAndAddProjectOnly"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO103A_CreateAndAddProjectOnly(this IServiceCollection services,
+            IServiceAction<IProjectContextProvider> projectContextProviderAction,
+            IServiceAction<ISolutionContextProvider> solutionContextProviderAction)
+        {
+            services
+                .Run(projectContextProviderAction)
+                .Run(solutionContextProviderAction)
+                .AddSingleton<O103A_CreateAndAddProjectOnly>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O103B_ModifyInitialProjectForProjectType"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO103B_ModifyInitialProjectForProjectType(this IServiceCollection services,
+            IServiceAction<IFileSystemContextProviderAggregation> fileSystemContextProviderAggregationAction,
+            IServiceAction<IProjectContextProvider> projectContextProviderAction,
+            IServiceAction<ISyntaxContextProviderAggregation> syntaxContextProviderAggregationAction)
+        {
+            services
+                .Run(fileSystemContextProviderAggregationAction)
+                .Run(projectContextProviderAction)
+                .Run(syntaxContextProviderAggregationAction)
+                .AddSingleton<O103B_ModifyInitialProjectForProjectType>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O102_CreateSolutionInExistingRespository"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO102_CreateSolutionInExistingRespository(this IServiceCollection services,
+            IServiceAction<O102_CreateSolutionInExistingRespositoryCore> o102_CreateSolutionInExistingRespositoryCoreAction)
+        {
+            services
+                .Run(o102_CreateSolutionInExistingRespositoryCoreAction)
+                .AddSingleton<O102_CreateSolutionInExistingRespository>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O102_CreateSolutionInExistingRespositoryCore"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO102_CreateSolutionInExistingRespositoryCore(this IServiceCollection services,
+            IServiceAction<IRepositoriesDirectoryPathProvider> repositoriesDirectoryPathProviderAction,
+            IServiceAction<IRepositorySolutionProjectFileSystemConventions> repositorySolutionProjectFileSystemConventionsAction,
+            IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction,
+            IServiceAction<O102A_CreateSolutionOnly> o102A_CreateSolutionOnlyAction,
+            IServiceAction<O102B_ModifyInitialSolution> o102B_ModifyInitialSolutionAction)
+        {
+            services
+                .Run(repositoriesDirectoryPathProviderAction)
+                .Run(repositorySolutionProjectFileSystemConventionsAction)
+                .Run(stringlyTypedPathOperatorAction)
+                .Run(o102A_CreateSolutionOnlyAction)
+                .Run(o102B_ModifyInitialSolutionAction)
+                .AddSingleton<O102_CreateSolutionInExistingRespositoryCore>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O102A_CreateSolutionOnly"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO102A_CreateSolutionOnly(this IServiceCollection services,
+            IServiceAction<IBasicSolutionContextProvider> solutionContextProviderAction)
+        {
+            services
+                .Run(solutionContextProviderAction)
+                .AddSingleton<O102A_CreateSolutionOnly>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O102B_ModifyInitialSolution"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO102B_ModifyInitialSolution(this IServiceCollection services,
+            IServiceAction<ISolutionContextProvider> solutionContextProviderAction)
+        {
+            services
+                .Run(solutionContextProviderAction)
+                .AddSingleton<O102B_ModifyInitialSolution>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O101_DeleteNewRepository"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO101_DeleteNewRepository(this IServiceCollection services,
+            IServiceAction<O101_DeleteNewRepositoryCore> o101_DeleteNewRepositoryCoreAction)
+        {
+            services
+                .Run(o101_DeleteNewRepositoryCoreAction)
+                .AddSingleton<O101_DeleteNewRepository>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O101_DeleteNewRepositoryCore"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO101_DeleteNewRepositoryCore(this IServiceCollection services,
+            IServiceAction<ILocalRepositoryContextProvider> localRepositoryContextProviderAction,
+            IServiceAction<IRemoteRepositoryContextProvider> remoteRepositoryContextProviderAction)
+        {
+            services
+                .Run(localRepositoryContextProviderAction)
+                .Run(remoteRepositoryContextProviderAction)
+                .AddSingleton<O101_DeleteNewRepositoryCore>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O100_CreateNewRepository"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO100_CreateNewRepository(this IServiceCollection services,
+            IServiceAction<O100_CreateNewRepositoryCore> o100_CreateNewRepositoryCoreAction)
+        {
+            services
+                .Run(o100_CreateNewRepositoryCoreAction)
+                .AddSingleton<O100_CreateNewRepository>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O100_CreateNewRepositoryCore"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO100_CreateNewRepositoryCore(this IServiceCollection services,
+            IServiceAction<O100A_CreateNewRepositoryOnly> o100A_CreateNewRepositoryOnlyAction,
+            IServiceAction<O100B_InitialSetupWithCheckIn> o100B_InitialSetupWithCheckInAction)
+        {
+            services
+                .Run(o100A_CreateNewRepositoryOnlyAction)
+                .Run(o100B_InitialSetupWithCheckInAction)
+                .AddSingleton<O100_CreateNewRepositoryCore>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O100B_InitialSetupWithCheckIn"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO100B_InitialSetupWithCheckIn(this IServiceCollection services,
+            IServiceAction<ILocalRepositoryContextProvider> localRepositoryContextProviderAction)
+        {
+            services
+                .Run(localRepositoryContextProviderAction)
+                .AddSingleton<O100B_InitialSetupWithCheckIn>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds the <see cref="O100A_CreateNewRepositoryOnly"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceCollection AddO100A_CreateNewRepositoryOnly(this IServiceCollection services,
+            IServiceAction<ILocalRepositoryContextProvider> localRepositoryContextProviderAction,
+            IServiceAction<IRemoteRepositoryContextProvider> remoteRepositoryContextProviderAction)
+        {
+            services
+                .Run(localRepositoryContextProviderAction)
+                .Run(remoteRepositoryContextProviderAction)
+                .AddSingleton<O100A_CreateNewRepositoryOnly>();
+
+            return services;
+        }
+
         /// <summary>
         /// Adds the <see cref="O007_CreateNewProgramAsServiceRepository"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
@@ -200,9 +421,22 @@ namespace R5T.S0026
         /// <summary>
         /// Adds the <see cref="O999_Scratch"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
-        public static IServiceCollection AddO999_Scratch(this IServiceCollection services)
+        public static IServiceCollection AddO999_Scratch(this IServiceCollection services,
+            IServiceAction<IFileSystemContextProviderAggregation> fileSystemContextProviderAggregationAction,
+            IServiceAction<IBasicLocalRepositoryContextProvider> localRepositoryContextProviderAction,
+            IServiceAction<IProjectContextProvider> projectContextProviderAction,
+            IServiceAction<IRemoteRepositoryContextProvider> remoteRepositoryContextProviderAction,
+            IServiceAction<IRepositoriesDirectoryPathProvider> repositoriesDirectoryPathProviderAction,
+            IServiceAction<IBasicSolutionContextProvider> solutionContextProviderAction)
         {
-            services.AddSingleton<O999_Scratch>();
+            services
+                .Run(fileSystemContextProviderAggregationAction)
+                .Run(localRepositoryContextProviderAction)
+                .Run(projectContextProviderAction)
+                .Run(remoteRepositoryContextProviderAction)
+                .Run(repositoriesDirectoryPathProviderAction)
+                .Run(solutionContextProviderAction)
+                .AddSingleton<O999_Scratch>();
 
             return services;
         }

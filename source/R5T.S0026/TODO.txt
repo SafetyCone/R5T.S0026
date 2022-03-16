@@ -1,10 +1,32 @@
-* Modify O007_CreateNewProgramAsServiceRepository to include R5T.T0020 as a project reference.
-* Fix O007_CreateNewProgramAsServiceRepository to put IServiceActionExtensions in /Bases/Extensions.
-* Fix O007_CreateNewProgramAsServiceRepository to have propery line spacing for AddHostStartupAction, and AddHostStartup
+--- Program-as-a-service repository creation ---
+
+* (tested?) Modify O007_CreateNewProgramAsServiceRepository to include R5T.T0020 as a project reference.
+* (tested?) Fix O007_CreateNewProgramAsServiceRepository to put IServiceActionExtensions in /Bases/Extensions.
+* Fix O007_CreateNewProgramAsServiceRepository to have propery line spacing for:
+	* Program
+	* HostStartup
+	* IServiceActionExtensions.AddHostStartupAction,
+	* IServiceCollectionExtensions.AddHostStartup
 * Add Documentation class.
 * Add Project Plan.txt file.
+* Add R5T.{X}.Library project file.
+* Add console hello-world output to Program.RunOperation().
+* Add logging:
+	* Add R5T.D0094.I001
+	* Add R5T.D0095.I001
+* Sort usings in HostStartup.
 
 * Create operation to add an operation class to a project.
+
+
+--- Add extensions library to project ---
+
+* Provide different class names for:
+	* /Bases/Extensions/Class1.cs
+	* /Extensions/Class1.cs
+	* /Services/Extensions/Class1.cs
+
+
 
 
 Operations:

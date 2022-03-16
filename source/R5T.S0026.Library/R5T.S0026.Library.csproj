@@ -5,10 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\R5T.B0002\source\R5T.B0002.X001\R5T.B0002.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0082\source\R5T.D0082.X000\R5T.D0082.X000.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0084\source\R5T.D0084.D002.Base\R5T.D0084.D002.Base.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0101\source\R5T.D0101.X001\R5T.D0101.X001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0111\source\R5T.D0111.D001.Base\R5T.D0111.D001.Base.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0116\source\R5T.D0116\R5T.D0116.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0020\source\R5T.T0020\R5T.T0020.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0040\source\R5T.T0040.X001\R5T.T0040.X001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.T0062\source\R5T.T0062.X001\R5T.T0062.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0103.X0001\source\R5T.T0103.X0001\R5T.T0103.X0001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0103\source\R5T.T0103.X002\R5T.T0103.X002.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0106.X0001\source\R5T.T0106.X0001\R5T.T0106.X0001.csproj" />
@@ -18,6 +23,7 @@
     <ProjectReference Include="..\..\..\R5T.T0113\source\R5T.T0113.X000\R5T.T0113.X000.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0123.X0001\source\R5T.T0123.X0001\R5T.T0123.X0001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0123\source\R5T.T0123.X001\R5T.T0123.X001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.T0126\source\R5T.T0126\R5T.T0126.csproj" />
     <ProjectReference Include="..\..\..\R5T.X0002\source\R5T.X0002\R5T.X0002.csproj" />
     <ProjectReference Include="..\..\..\R5T.X0003\source\R5T.X0003\R5T.X0003.csproj" />
   </ItemGroup>

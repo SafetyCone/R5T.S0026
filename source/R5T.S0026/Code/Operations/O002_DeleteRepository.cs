@@ -30,7 +30,7 @@ namespace R5T.S0026
             //var repositoryNameOverride = 
 
             // Run.
-            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryName(
+            var repositoryName = Instances.RepositoryNameOperator.AdjustRepositoryNameForPrivacy(
                 unadjustedRepositoryName,
                 isPrivate);
 

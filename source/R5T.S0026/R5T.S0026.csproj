@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\..\R5T.D0102\source\R5T.D0102.X001\R5T.D0102.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0104\source\R5T.D0104.X001\R5T.D0104.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.D0111\source\R5T.D0111.D001.I001\R5T.D0111.D001.I001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.D0116.A0001\source\R5T.D0116.A0001\R5T.D0116.A0001.csproj" />
     <ProjectReference Include="..\..\..\R5T.L0014\source\R5T.L0014.X001\R5T.L0014.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.O0001\source\R5T.O0001\R5T.O0001.csproj" />
     <ProjectReference Include="..\..\..\R5T.Ostrogothia.Rivet\source\R5T.Ostrogothia.Rivet\R5T.Ostrogothia.Rivet.csproj" />
