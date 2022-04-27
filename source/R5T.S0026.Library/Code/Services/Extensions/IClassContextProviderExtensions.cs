@@ -46,7 +46,7 @@ namespace System
                 outputCompilationUnit = outputCompilationUnit.ReplaceNode_Better(@namespace, newNamespace);
             }
 
-            var classAnnotation = ClassDeclarationAnnotation.From(annotation);
+            var classAnnotation = ClassAnnotation.From(annotation);
 
             var classContext = classContextProvider.GetClassContext(classAnnotation);
 
@@ -88,7 +88,7 @@ namespace R5T.S0026.Library
 #pragma warning disable IDE0060 // Remove unused parameter
         public static ClassContext GetClassContext(this IClassContextProvider classContextProvider,
 #pragma warning restore IDE0060 // Remove unused parameter
-            ClassDeclarationAnnotation classAnnotation)
+            ClassAnnotation classAnnotation)
         {
             var output = new ClassContext
             {
@@ -99,7 +99,7 @@ namespace R5T.S0026.Library
         }
 
         public static ClassContextHierarchy GetClassContextHierarchy(this IClassContextProvider classContextProvider,
-            ClassDeclarationAnnotation classAnnotation,
+            ClassAnnotation classAnnotation,
             INamespaceContext namespaceContext)
         {
             var classContext = classContextProvider.GetClassContext(

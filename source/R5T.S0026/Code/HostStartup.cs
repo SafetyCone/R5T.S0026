@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using R5T.Magyar;
 using R5T.Ostrogothia.Rivet;
@@ -16,8 +17,11 @@ using R5T.D0079.A002;
 using R5T.D0081.I001;
 using R5T.D0082.A001;
 using R5T.D0083.I001;
+using R5T.D0084.D001.I002;
 using R5T.D0084.D002.I001;
 using R5T.D0088.I0002;
+using R5T.D0094.I001;
+using R5T.D0095.I001;
 using R5T.D0101.I0001;
 using R5T.D0101.I001;
 using R5T.D0111.D001.I001;
@@ -66,6 +70,19 @@ namespace R5T.S0026
             var servicesPlatform = Instances.ServiceAction.AddProvidedServiceActionAggregation(
                 servicesPlatformRequiredServiceActionAggregation);
 
+            // Logging.
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder
+                    .SetMinimumLevel(LogLevel.Debug)
+                    .AddConsole(
+                        servicesPlatform.LoggerSynchronicityProviderAction)
+                    .AddFile(
+                        servicesPlatform.LogFilePathProviderAction,
+                        servicesPlatform.LoggerSynchronicityProviderAction)
+                    ;
+            });
+
             // Project repository.
             var projectRepositoryFilePathsProviderAction = Instances.ServiceAction.AddHardCodedProjectRepositoryFilePathsProviderAction();
 
@@ -95,7 +112,6 @@ namespace R5T.S0026
             // Core competencies.
             // Level 00.
             var classContextProviderAction = Instances.ServiceAction.AddClassContextProviderAction();
-            
             var methodContextProviderAction = Instances.ServiceAction.AddMethodContextProviderAction();
             var namespaceContextProviderAction = Instances.ServiceAction.AddNamespaceContextProviderAction();
             var repositoriesDirectoryPathProviderAction = Instances.ServiceAction.AddConstructorBasedRepositoriesDirectoryPathProviderAction(
@@ -104,6 +120,8 @@ namespace R5T.S0026
                 servicesPlatform.StringlyTypedPathOperatorAction);
 
             // Level 01.
+            var allRepositoryDirectoryPathsProviderAction = Instances.ServiceAction.AddAllRepositoryDirectoryPathsProviderAction(
+                repositoriesDirectoryPathProviderAction);
             var compilationUnitContextProviderAction = Instances.ServiceAction.AddCompilationUnitContextProviderAction(
                 usingDirectivesFormatterActions.UsingDirectivesFormatterAction);
             var directoryContextProviderAction = Instances.ServiceAction.AddDirectoryContextProviderAction(
@@ -249,6 +267,12 @@ namespace R5T.S0026
             var o103_CreateProjectForExistingSolutionAction = Instances.ServiceAction.AddO103_CreateProjectForExistingSolutionAction(
                 o103_CreateProjectForExistingSolutionCoreAction);
 
+            // 900's.
+            var o900_CreateAllRepositoryAllProjectsSolutionFilesAction = Instances.ServiceAction.AddO900_CreateAllRepositoryAllProjectsSolutionFilesAction(
+                allRepositoryDirectoryPathsProviderAction,
+                localRepositoryContextProviderAction,
+                solutionContextProviderAction);
+
             // Misc.
             var o999_ScratchAction = Instances.ServiceAction.AddO999_ScratchAction(
                 fileSystemContextProviderAggregationAction,
@@ -263,7 +287,6 @@ namespace R5T.S0026
                 .Run(servicesPlatform.ConfigurationAuditSerializerAction)
                 .Run(servicesPlatform.ServiceCollectionAuditSerializerAction)
                 // Operations.
-                .Run(o999_ScratchAction)
                 .Run(o001_CreateNewRepositoryAction)
                 .Run(o002_DeleteRepositoryAction)
                 .Run(o003_CreateNewBasicTypesLibraryAction)
@@ -272,12 +295,15 @@ namespace R5T.S0026
                 .Run(o006_CreateNewProgramAsServiceSolutionAction)
                 .Run(o006a_ModifyHostStartupForA0003Action)
                 .Run(o007_CreateNewProgramAsServiceRepositoryAction)
-                // Operations - 100's
+                // Operations - 100's.
                 .Run(o100_CreateNewRepositoryAction)
                 .Run(o101_DeleteNewRepositoryAction)
                 .Run(o102_CreateSolutionInExistingRespositoryAction)
                 .Run(o103_CreateProjectForExistingSolutionAction)
                 .Run(o104_DeleteProjectFromSolutionAction)
+                // Operations - 900's.
+                .Run(o900_CreateAllRepositoryAllProjectsSolutionFilesAction)
+                .Run(o999_ScratchAction)
                 ;
 
             return Task.CompletedTask;

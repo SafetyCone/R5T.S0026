@@ -121,5 +121,13 @@ namespace System
 
             return gitIgnoreFilePath;
         }
+
+        public static string GetRepositoryName(this ILocalRepositoryContext localRepositoryContext)
+        {
+            var output = Instances.RepositoryNameOperator.GetRepositoryNameFromRepositoryDirectoryPath(
+                localRepositoryContext.DirectoryPath);
+
+            return output;
+        }
     }
 }

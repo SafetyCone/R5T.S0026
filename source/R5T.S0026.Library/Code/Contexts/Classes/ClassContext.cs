@@ -7,6 +7,6 @@ namespace R5T.S0026.Library
 {
     public class ClassContext : IClassContext
     {
-        public ClassDeclarationAnnotation ClassAnnotation { get; set; }
+        public ClassAnnotation ClassAnnotation { get; set; }
     }
 }

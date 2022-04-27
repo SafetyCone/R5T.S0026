@@ -61,10 +61,13 @@ namespace R5T.S0026
             //await this.ServiceProvider.Run<O002_DeleteRepository>();
             //await this.ServiceProvider.Run<O001_CreateNewRepository>();
 
+            //await this.ServiceProvider.Run<O900_CreateAllRepositoryAllProjectsSolutionFiles>();
             //await this.ServiceProvider.Run<O999_Scratch>();
         }
 
+#pragma warning disable IDE0051 // Remove unused private members
         private async Task Scratch()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             var projectFilePath = @"C:\Code\DEV\Git\GitHub\SafetyCone\R5T.Testing2.Private\source\R5T.Testing2\R5T.Testing2.csproj";
 

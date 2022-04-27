@@ -9,6 +9,6 @@ namespace R5T.S0026.Library
     {
         // No services for now, but will contain class-related services.
 
-        ClassDeclarationAnnotation ClassAnnotation { get; }
+        ClassAnnotation ClassAnnotation { get; }
     }
 }

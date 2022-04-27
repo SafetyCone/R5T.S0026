@@ -9,6 +9,7 @@ using R5T.D0078;
 using R5T.D0079;
 using R5T.D0082;
 using R5T.D0083;
+using R5T.D0084.D001;
 using R5T.D0084.D002;
 using R5T.D0101;
 using R5T.D0111.D001;
@@ -23,6 +24,22 @@ namespace R5T.S0026
 {
     public static partial class IServiceActionExtensions
     {
+        /// <summary>
+        /// Adds the <see cref="O900_CreateAllRepositoryAllProjectsSolutionFiles"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
+        /// </summary>
+        public static IServiceAction<O900_CreateAllRepositoryAllProjectsSolutionFiles> AddO900_CreateAllRepositoryAllProjectsSolutionFilesAction(this IServiceAction _,
+            IServiceAction<IAllRepositoryDirectoryPathsProvider> allRepositoryDirectoryPathsProviderAction,
+            IServiceAction<ILocalRepositoryContextProvider> localRepositoryContextProviderAction,
+            IServiceAction<ISolutionContextProvider> solutionContextProviderAction)
+        {
+            var serviceAction = _.New<O900_CreateAllRepositoryAllProjectsSolutionFiles>(services => services.AddO900_CreateAllRepositoryAllProjectsSolutionFiles(
+                allRepositoryDirectoryPathsProviderAction,
+                localRepositoryContextProviderAction,
+                solutionContextProviderAction));
+
+            return serviceAction;
+        }
+
         /// <summary>
         /// Adds the <see cref="O104_DeleteProjectFromSolution"/> operation as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>

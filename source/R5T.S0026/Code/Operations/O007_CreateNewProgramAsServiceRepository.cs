@@ -25,9 +25,9 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Inputs.
-            var unadjustedRepositoryName = "R5T.S0030"; // Unadjusted relative to whether the repository is private or not.
+            var unadjustedRepositoryName = "R5T.S0031"; // Unadjusted relative to whether the repository is private or not.
             var isPrivate = false;
-            var repositoryDescription = "Nomad functionality: Survey service definitions, implementations, and dependency mappings and store these in a database.";
+            var repositoryDescription = "Pushkar functionality: Git commit and push all changes across all repositories to GitHub.";
 
             // Run.
             var libraryName = Instances.RepositoryNameOperator.GetLibraryName(unadjustedRepositoryName);

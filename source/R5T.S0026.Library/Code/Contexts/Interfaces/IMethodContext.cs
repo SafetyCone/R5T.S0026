@@ -9,6 +9,6 @@ namespace R5T.S0026.Library
     {
         // No services for now, but will contain method-related services.
 
-        MethodDeclarationAnnotation MethodAnnotation { get; }
+        MethodAnnotation MethodAnnotation { get; }
     }
 }

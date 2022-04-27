@@ -7,6 +7,6 @@ namespace R5T.S0026.Library
 {
     public class MethodContext : IMethodContext
     {
-        public MethodDeclarationAnnotation MethodAnnotation { get; set; }
+        public MethodAnnotation MethodAnnotation { get; set; }
     }
 }

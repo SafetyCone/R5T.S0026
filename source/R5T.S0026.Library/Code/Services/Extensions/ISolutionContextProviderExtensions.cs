@@ -8,6 +8,51 @@ namespace System
 {
     public static class ISolutionContextProviderExtensions
     {
+        public static async Task InAcquiredSolutionContext(this ISolutionContextProvider solutionContextProvider,
+            string solutionFilePath,
+            Func<ISolutionContext, Task> solutionContextAction)
+        {
+            var solutionFileExists = Instances.FileSystemOperator.FileExists(solutionFilePath);
+            if (!solutionFileExists)
+            {
+                await solutionContextProvider.VisualStudioSolutionFileOperator.Create(
+                    solutionFilePath);
+            }
+
+            await solutionContextProvider.InSolutionContext_WithoutExistenceCheck(
+                solutionFilePath,
+                solutionContextAction);
+        }
+
+        public static async Task InAcquiredSolutionContext(this ISolutionContextProvider solutionContextProvider,
+            string solutionName,
+            string solutionDirectoryPath,
+            Func<ISolutionContext, Task> solutionContextAction)
+        {
+            var solutionFilePath = solutionContextProvider.GetSolutionFilePath(
+                solutionName,
+                solutionDirectoryPath);
+
+            await solutionContextProvider.InAcquiredSolutionContext(
+                solutionFilePath,
+                solutionContextAction);
+        }
+
+
+        public static async Task InAcquiredSolutionContext(this ISolutionContextProvider solutionContextProvider,
+            string solutionName,
+            ILocalRepositoryContext localRepositoryContext,
+            Func<ISolutionContext, Task> solutionContextAction)
+        {
+            var solutionDirectoryPath = Instances.SolutionPathsOperator.GetSourceSolutionDirectoryPath(
+                localRepositoryContext.DirectoryPath);
+
+            await solutionContextProvider.InAcquiredSolutionContext(
+                solutionName,
+                solutionDirectoryPath,
+                solutionContextAction);
+        }
+
         public static async Task InSolutionContext_WithoutExistenceCheck(this ISolutionContextProvider solutionContextProvider,
             string solutionFilePath,
             Func<ISolutionContext, Task> solutionContextAction)

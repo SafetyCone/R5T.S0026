@@ -4,6 +4,7 @@ using R5T.B0002;
 using R5T.L0011.T001;
 using R5T.T0021;
 using R5T.T0029.Dotnet.T001;
+using R5T.T0032;
 using R5T.T0034;
 using R5T.T0036;
 using R5T.T0037;
@@ -40,6 +41,7 @@ namespace R5T.S0026
         public static ICompilationUnitGenerator CompilationUnitGenerator { get; } = T0045.CompilationUnitGenerator.Instance;
         public static ICompilationUnitOperator CompilationUnitOperator { get; } = T0045.CompilationUnitOperator.Instance;
         public static IFileName FileName { get; } = T0021.FileName.Instance;
+        public static IFileExtension FileExtension { get; } = T0032.FileExtension.Instance;
         public static IFileSystemOperator FileSystemOperator { get; } = T0044.FileSystemOperator.Instance;
         public static IHost Host { get; } = T0070.Host.Instance;
         public static IIndentation Indentation { get; } = T0036.Indentation.Instance;

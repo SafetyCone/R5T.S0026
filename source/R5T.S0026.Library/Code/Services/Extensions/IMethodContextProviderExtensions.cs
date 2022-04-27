@@ -46,7 +46,7 @@ namespace System
                 outputCompilationUnit = outputCompilationUnit.ReplaceNode_Better(@class, newClass);
             }
 
-            var methodAnnotation = MethodDeclarationAnnotation.From(annotation);
+            var methodAnnotation = MethodAnnotation.From(annotation);
 
             var methodContext = methodContextProvider.GetMethodContext(methodAnnotation);
 
@@ -85,8 +85,8 @@ namespace R5T.S0026.Library
 {
     public static class IMethodContextProviderExtensions
     {
-        public static MethodContext GetMethodContext(this IMethodContextProvider methodContextProvider,
-            MethodDeclarationAnnotation methodAnnotation)
+        public static MethodContext GetMethodContext(this IMethodContextProvider _,
+            MethodAnnotation methodAnnotation)
         {
             var output = new MethodContext
             {

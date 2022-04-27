@@ -42,7 +42,7 @@ namespace System
                 outputCompilationUnit = outputCompilationUnit.AddNamespace(annotatedNamespace);
             }
 
-            var namespaceAnnotation = NamespaceDeclarationAnnotation.From(annotation);
+            var namespaceAnnotation = NamespaceAnnotation.From(annotation);
 
             var namespaceContext = namespaceContextProvider.GetNamespaceContext(namespaceAnnotation);
 
@@ -86,7 +86,7 @@ namespace R5T.S0026.Library
 #pragma warning disable IDE0060 // Remove unused parameter
         public static NamespaceContext GetNamespaceContext(this INamespaceContextProvider namespaceContextProvider,
 #pragma warning restore IDE0060 // Remove unused parameter
-            NamespaceDeclarationAnnotation namespaceDeclarationAnnotation)
+            NamespaceAnnotation namespaceDeclarationAnnotation)
         {
             var output = new NamespaceContext
             {

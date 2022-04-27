@@ -7,6 +7,6 @@ namespace R5T.S0026.Library
 {
     public class NamespaceContext : INamespaceContext
     {
-        public NamespaceDeclarationAnnotation NamespaceAnnotation { get; set; }
+        public NamespaceAnnotation NamespaceAnnotation { get; set; }
     }
 }
