@@ -50,7 +50,7 @@ namespace System
 
         public static async Task<bool> Exists(this IRemoteRepositoryContext remoteRepositoryContext)
         {
-            var output = await remoteRepositoryContext.RemoteRepositoryOperator.RepositoryExists(
+            var output = await remoteRepositoryContext.RemoteRepositoryOperator.RepositoryExists_SafetyCone(
                 remoteRepositoryContext.Name);
 
             return output;

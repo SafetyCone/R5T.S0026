@@ -43,7 +43,7 @@ namespace R5T.S0026
             // Run.
             // Safety checks.
             // Verify that the repository can be created (i.e. it doesn't already exist).
-            await this.GitHubOperator.VerifyCanCreateRepository(repositorySpecification.Name);
+            await this.GitHubOperator.VerifyCanCreateRepository_SafetyCone(repositorySpecification.Name);
 
             // Verify that the local repository directory does not already exist.
             var repositoriesDirectoryPath = await this.RepositoriesDirectoryPathProvider.GetRepositoriesDirectoryPath();

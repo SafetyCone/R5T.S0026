@@ -16,7 +16,7 @@ namespace System
             Func<GitHubRepositorySpecification, Task<GitHubRepositorySpecification>> repositorySpecificationConfigurationAction)
         {
             // Create the repository if it does not exist.
-            var remoteRepositoryExists = await remoteRepositoryContextProvider.RemoteRepositoryOperator.RepositoryExists(repositoryName);
+            var remoteRepositoryExists = await remoteRepositoryContextProvider.RemoteRepositoryOperator.RepositoryExists_SafetyCone(repositoryName);
             if(!remoteRepositoryExists)
             {
                 var remoteRepositorySpecification = Instances.GitHubRepositorySpecificationGenerator.GetSafetyConeDefault(
@@ -52,7 +52,7 @@ namespace System
             string repositoryName,
             Func<IRemoteRepositoryContext, Task> remoteRepositoryContextAction)
         {
-            var repositoryExists = await remoteRepositoryContextProvider.RemoteRepositoryOperator.RepositoryExists(repositoryName);
+            var repositoryExists = await remoteRepositoryContextProvider.RemoteRepositoryOperator.RepositoryExists_SafetyCone(repositoryName);
             if(!repositoryExists)
             {
                 throw new Exception($"Remote repository '{repositoryName}' does not exist.");

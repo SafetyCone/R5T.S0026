@@ -20,7 +20,7 @@ namespace R5T.S0026.Library
     public static class IServiceActionExtensions
     {
         /// <summary>
-        /// Adds the <see cref="MethodContextProvider"/> implementation of <see cref="IMethodContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="MethodContextProvider"/> implementation of <see cref="IMethodContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IMethodContextProvider> AddMethodContextProviderAction(this IServiceAction _)
         {
@@ -29,7 +29,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="NamespaceContextProvider"/> implementation of <see cref="INamespaceContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="NamespaceContextProvider"/> implementation of <see cref="INamespaceContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<INamespaceContextProvider> AddNamespaceContextProviderAction(this IServiceAction _)
         {
@@ -38,7 +38,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="ClassContextProvider"/> implementation of <see cref="IClassContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="ClassContextProvider"/> implementation of <see cref="IClassContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IClassContextProvider> AddClassContextProviderAction(this IServiceAction _)
         {
@@ -47,7 +47,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="SyntaxContextProviderAggregation"/> implementation of <see cref="ISyntaxContextProviderAggregation"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="SyntaxContextProviderAggregation"/> implementation of <see cref="ISyntaxContextProviderAggregation"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<ISyntaxContextProviderAggregation> AddSyntaxContextProviderAggregationAction(this IServiceAction _,
             IServiceAction<IClassContextProvider> classContextProviderAction,
@@ -65,7 +65,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="SolutionContextProvider"/> implementation of <see cref="ISolutionContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="SolutionContextProvider"/> implementation of <see cref="ISolutionContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<ISolutionContextProvider> AddSolutionContextProviderAction(this IServiceAction _,
             IServiceAction<IProjectRepository> projectRepositoryAction,
@@ -83,7 +83,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="RepositorySolutionProjectFileSystemConventions"/> implementation of <see cref="IRepositorySolutionProjectFileSystemConventions"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="RepositorySolutionProjectFileSystemConventions"/> implementation of <see cref="IRepositorySolutionProjectFileSystemConventions"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IRepositorySolutionProjectFileSystemConventions> AddRepositorySolutionProjectFileSystemConventionsAction(this IServiceAction _,
             IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction)
@@ -95,7 +95,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="LocalRepositoryContextProvider"/> implementation of <see cref="ILocalRepositoryContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="LocalRepositoryContextProvider"/> implementation of <see cref="ILocalRepositoryContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<ILocalRepositoryContextProvider> AddLocalRepositoryContextProviderAction(this IServiceAction _,
             IServiceAction<IGitIgnoreTemplateFilePathProvider> gitIgnoreTemplateFilePathProviderAction,
@@ -113,7 +113,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="CompilationUnitContextProvider"/> implementation of <see cref="ICompilationUnitContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="CompilationUnitContextProvider"/> implementation of <see cref="ICompilationUnitContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<ICompilationUnitContextProvider> AddCompilationUnitContextProviderAction(this IServiceAction _,
             IServiceAction<IUsingDirectivesFormatter> usingDirectivesFormatterAction)
@@ -125,7 +125,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="FileSystemContextProviderAggregation"/> implementation of <see cref="IFileSystemContextProviderAggregation"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="FileSystemContextProviderAggregation"/> implementation of <see cref="IFileSystemContextProviderAggregation"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IFileSystemContextProviderAggregation> AddFileSystemContextProviderAggregationAction(this IServiceAction _,
             IServiceAction<IDirectoryContextProvider> directoryContextProviderAction,
@@ -139,7 +139,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="FileContextProvider"/> implementation of <see cref="IFileContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="FileContextProvider"/> implementation of <see cref="IFileContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IFileContextProvider> AddFileContextProviderAction(this IServiceAction _,
             IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction)
@@ -151,7 +151,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="DirectoryContextProvider"/> implementation of <see cref="IDirectoryContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="DirectoryContextProvider"/> implementation of <see cref="IDirectoryContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IDirectoryContextProvider> AddDirectoryContextProviderAction(this IServiceAction _,
             IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction)
@@ -163,7 +163,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="ProjectContextProvider"/> implementation of <see cref="IProjectContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="ProjectContextProvider"/> implementation of <see cref="IProjectContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IProjectContextProvider> AddProjectContextProviderAction(this IServiceAction _,
             IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction,
@@ -177,7 +177,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="BasicSolutionContextProvider"/> implementation of <see cref="IBasicSolutionContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="BasicSolutionContextProvider"/> implementation of <see cref="IBasicSolutionContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IBasicSolutionContextProvider> AddBasicSolutionContextProviderAction(this IServiceAction _,
             IServiceAction<IStringlyTypedPathOperator> stringlyTypedPathOperatorAction,
@@ -193,7 +193,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="BasicLocalRepositoryContextProvider"/> implementation of <see cref="IBasicLocalRepositoryContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="BasicLocalRepositoryContextProvider"/> implementation of <see cref="IBasicLocalRepositoryContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IBasicLocalRepositoryContextProvider> AddBasicLocalRepositoryContextProviderAction(this IServiceAction _,
             IServiceAction<IGitOperator> gitOperatorAction,
@@ -207,7 +207,7 @@ namespace R5T.S0026.Library
         }
 
         /// <summary>
-        /// Adds the <see cref="RemoteRepositoryContextProvider"/> implementation of <see cref="IRemoteRepositoryContextProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="RemoteRepositoryContextProvider"/> implementation of <see cref="IRemoteRepositoryContextProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IRemoteRepositoryContextProvider> AddRemoteRepositoryContextProviderAction(this IServiceAction _,
             IServiceAction<IGitHubOperator> gitHubOperatorAction)

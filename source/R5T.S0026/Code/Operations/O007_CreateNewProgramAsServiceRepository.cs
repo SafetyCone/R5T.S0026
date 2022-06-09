@@ -25,9 +25,9 @@ namespace R5T.S0026
         public async Task Run()
         {
             // Inputs.
-            var unadjustedRepositoryName = "R5T.S0031"; // Unadjusted relative to whether the repository is private or not.
+            var unadjustedRepositoryName = "R5T.E0047"; // Unadjusted relative to whether the repository is private or not.
             var isPrivate = false;
-            var repositoryDescription = "Pushkar functionality: Git commit and push all changes across all repositories to GitHub.";
+            var repositoryDescription = "Experiment in creating type and method names that uniquely identify .NET C# types according to the rules of XML documentation ID strings.";
 
             // Run.
             var libraryName = Instances.RepositoryNameOperator.GetLibraryName(unadjustedRepositoryName);

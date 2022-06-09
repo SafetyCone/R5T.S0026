@@ -5,6 +5,8 @@ using R5T.D0079;
 
 using R5T.S0026.Library;
 
+using Instances = R5T.S0026.Library.Instances;
+
 
 namespace System
 {
