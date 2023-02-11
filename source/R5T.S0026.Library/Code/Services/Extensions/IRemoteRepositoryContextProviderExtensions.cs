@@ -24,7 +24,7 @@ namespace System
 
                 remoteRepositorySpecification = await repositorySpecificationConfigurationAction(remoteRepositorySpecification);
 
-                await remoteRepositoryContextProvider.RemoteRepositoryOperator.CreateRepositoryNonIdempotent(remoteRepositorySpecification);
+                await remoteRepositoryContextProvider.RemoteRepositoryOperator.CreateRepository_NonIdempotent(remoteRepositorySpecification);
             }
 
             // Now perform the remote repository action in context.

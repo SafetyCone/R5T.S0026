@@ -248,7 +248,7 @@ var servicesPlatform = Instances.ServiceAction.AddProvidedServiceActionAggregati
 
                             // Separate all statements, except the first, with blank lines.
                             var statements = allStatements
-                                .TakeFirst()
+                                .TakeFirst2()
                                 .Concat(allStatements
                                     .SkipFirst()
                                     .PrependBlankLine()) // All statements should start on a new line.
